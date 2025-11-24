@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>苗栗三日遊 2025 - 行程規劃</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #5A7D7C; /* 苗栗山林綠 */
+            --secondary-color: #DAD7CD; /* 淺米色 */
+            --accent-color: #A3B18A; /* 草原綠 */
+            --text-color: #344E41; /* 深墨綠 */
+            --bg-color: #F0F2F0;
+            --warning-color: #D9534F;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC", "Microsoft JhengHei", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* 置頂導覽列 */
+        nav {
+            position: sticky;
+            top: 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 15px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: bold;
+            margin: 0 15px;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* 頁首 Hero Section */
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #DAD7CD 0%, #A3B18A 100%);
+            color: var(--text-color);
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* 主要內容容器 */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 行程區塊 */
+        .day-section {
+            margin-bottom: 60px;
+            scroll-margin-top: 100px; /* 讓錨點定位不會被導覽列擋住 */
+        }
+
+        .day-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+
+        .day-badge {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-right: 15px;
+            font-size: 1.1rem;
+        }
+
+        .day-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* 卡片式佈局 */
+        .timeline {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column; /* 手機版預設垂直排列 */
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background-color: #eee;
+        }
+
+        .card-content {
+            padding: 25px;
+            flex: 1;
+        }
+
+        .card-time {
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card p {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .highlight {
+            background-color: #FFF3CD;
+            padding: 10px;
+            border-left: 4px solid var(--warning-color);
+            color: #856404;
+            font-size: 0.95rem;
+            margin-top: 10px;
+            border-radius: 4px;
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: var(--bg-color);
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: #666;
+            margin-right: 5px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            background-color: var(--text-color);
+            color: white;
+            margin-top: 50px;
+        }
+
+        /* 電腦版 RWD */
+        @media (min-width: 768px) {
+            .card {
+                flex-direction: row;
+                align-items: stretch;
+            }
+            
+            .card-img {
+                width: 40%;
+                height: auto;
+            }
+
+            header h1 {
+                font-size: 3.5rem;
+            }
+        }
+        
+        /* 平滑捲動 */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <div class="nav-links">
+                <a href="#day1"><i class="fas fa-calendar-day"></i> Day 1 (六)</a>
+                <a href="#day2"><i class="fas fa-calendar-day"></i> Day 2 (日)</a>
+                <a href="#day3"><i class="fas fa-calendar-day"></i> Day 3 (一)</a>
+            </div>
+        </div>
+    </nav>
+
+    <header>
+        <h1>苗栗三日遊 2025</h1>
+        <p><i class="far fa-calendar-alt"></i> 12/20 (六) — 12/22 (一)</p>
+    </header>
+
+    <div class="container">
+
+        <section id="day1" class="day-section">
+            <div class="day-header">
+                <span class="day-badge">12/20</span>
+                <span class="day-title">週六：南庄童話與露營之夜</span>
+            </div>
+            
+            <div class="timeline">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1548505372-4c4c64812316?q=80&w=800&auto=format&fit=crop" alt="台北出發" class="card-img">
+                    <div class="card-content">
+                        <span class="card-time">上午</span>
+                        <h3><i class="fas fa-car"></i> 台北南下出發</h3>
+                        <p>集合準備出發，沿途欣賞國道風光，前往苗栗南庄。</p>
+                        <div class="tag">交通</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="https://s.yimg.com/zp/MerchandiseImages/464778A555-Product-25566218.jpg" alt="蘇維拉莊園" class="card-img">
+                    <div class="card-content">
+                        <span class="card-time">午餐 & 下午</span>
+                        <h3><i class="fas fa-tree"></i> 蘇維拉莊園</h3>
+                        <p>彷彿走進精靈童話世界，擁有蘑菇屋與超長溜滑梯。在此享用午餐，俯瞰南庄美景。</p>
+                        <div class="tag">景觀餐廳</div>
+                        <div class="tag">親子</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="https://www.funwellcome.com/images/room_b_01.jpg" alt="逗點露營區" class="card-img">
+                    <div class="card-content">
+                        <span class="card-time">傍晚 & 住宿</span>
+                        <h3><i class="fas fa-campground"></i> 逗點露營區</h3>
+                        <p>五星級豪華露營體驗，享受戶外氛圍與舒適住宿。晚餐可於營區內安排或享用設施。</p>
+                        <div class="tag">豪華露營</div>
+                        <div class="tag">住宿</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="day2" class="day-section">
+            <div class="day-header">
+                <span class="day-badge">12/21</span>
+                <span class="day-title">週日：媽祖祈福與牧場風光</span>
+            </div>
+
+            <div class="timeline">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1496417263034-38ec4f0d6b21?q=80&w=800&auto=format&fit=crop" alt="早餐" class="card-img">
+                    <div class="card-content">
+                        <span class="card-time">早晨</span>
+                        <h3><i class="fas fa-coffee"></i> 營區早餐</h3>
+                        <p>在清新的晨光中享用早餐，享受營區最後的悠閒時光後退房。</p>
+                        <div class="tag">美食</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="https://www.taiwangods.com/upload/content/201411/b2390c0e-3526-4b9f-8019-05868f97a534.jpg" alt="白沙屯拱天宮" class="card-img">
+                    <div class="card-content">
+                        <span class="card-time">午餐</span>
+                        <h3><i class="fas fa-gopuram"></i> 白沙屯拱天宮</h3>
+                        <p>參拜著名的粉紅超跑媽祖，祈求平安。午餐可於廟口老街享用在地小吃。</p>
+                        <div class="tag">文化</div>
+                        <div class="tag">老街美食</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="https://www.flyingcow.com.tw/wp-content/uploads/2021/05/about_bg-scaled.jpg" alt="飛牛牧場" class="card-img">
+                    <div class="card-content">
+                        <span class="card-time">下午 & 住宿</span>
+                        <h3><i class="fas fa-cow"></i> 飛牛牧場</h3>
+                        <p>在廣闊的草原奔跑，體驗餵牛、擠牛奶樂趣。晚上直接入住牧場，享受寧靜夜色。</p>
+                        <div class="tag">生態</div>
+                        <div class="tag">住宿</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="day3" class="day-section">
+            <div class="day-header">
+                <span class="day-badge">12/22</span>
+                <span class="day-title">週一：鐵道懷舊與網美祕境</span>
+            </div>
+
+            <div class="timeline">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=800&auto=format&fit=crop" alt="牧場早餐" class="card-img">
+                    <div class="card-content">
+                        <span class="card-time">早晨</span>
+                        <h3><i class="fas fa-mug-hot"></i> 牧場活力早餐</h3>
+                        <p>享用新鮮乳製品早餐，呼吸新鮮空氣後整裝出發。</p>
+                        <div class="tag">美食</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="https://www.mlc.gov.tw/file/201912/027d7b1516f784a8d8c7b3e355f4d6a7.jpg" alt="龍騰斷橋" class="card-img">
+                    <div class="card-content">
+                        <span class="card-time">上午 (關鍵行程)</span>
+                        <h3><i class="fas fa-train"></i> 舊山線鐵道自行車 (龍騰斷橋)</h3>
+                        <p>騎乘小火車欣賞壯觀的龍騰斷橋遺址，感受百年鐵道工藝。</p>
+                        
+                        <div class="highlight">
+                            <i class="fas fa-exclamation-circle"></i> <strong>重要提醒：</strong>
+                            <br>1. 必須在 <strong>11:00 前</strong> 完成領票。
+                            <br>2. 路線包含：搭小火車至勝興車站（停留約40分鐘）。
+                        </div>
+                        <div class="tag">歷史古蹟</div>
+                        <div class="tag">必玩</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="https://blog.tripmoment.com.tw/wp-content/uploads/2020/05/DSC02344.jpg" alt="莫內祕密花園" class="card-img">
+                    <div class="card-content">
+                        <span class="card-time">下午</span>
+                        <h3><i class="fas fa-camera"></i> 莫內祕密花園</h3>
+                        <p>專為攝影打造的夢幻莊園，有多個異國風情場景，是旅程完美的壓軸打卡點。</p>
+                        <div class="tag">攝影</div>
+                        <div class="tag">網美景點</div>
+                    </div>
+                </div>
+
+                <div class="card" style="border-left: 5px solid #333;">
+                    <div class="card-content">
+                        <h3><i class="fas fa-home"></i> 快樂賦歸</h3>
+                        <p>結束三天兩夜美好的苗栗之旅，帶著滿滿回憶返回溫暖的家。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2025 苗栗三日遊行程規劃 | 祝旅途愉快</p>
+    </footer>
+
+</body>
+</html>
